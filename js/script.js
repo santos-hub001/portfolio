@@ -9,7 +9,7 @@ const CONFIG = {
     email:    'your-email@gmail.com',
     phone:    '+234XXXXXXXXXX',
   },
-  formspreeEndpoint: '',
+  formspreeEndpoint: 'https://formspree.io/f/mvkgpzon',
   roles: [
     'Web Developer',
     'Network Engineer',
