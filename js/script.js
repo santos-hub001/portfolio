@@ -3,11 +3,11 @@
    ====================================== */
 const CONFIG = {
   socials: {
-    whatsapp: 'https://wa.me/234XXXXXXXXXX',
-    facebook: 'https://facebook.com/yourusername',
-    twitter:  'https://x.com/yourusername',
-    email:    'your-email@gmail.com',
-    phone:    '+234XXXXXXXXXX',
+    whatsapp: 'https://wa.me/2348069916124',
+    facebook: 'https://facebook.com/',
+    twitter:  'https://x.com/askofsantos',
+    email:    'anthonychuma56@gmail.com',
+    phone:    '+2348069916124',
   },
   formspreeEndpoint: 'https://formspree.io/f/mvkgpzon',
   roles: [
