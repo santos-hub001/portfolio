@@ -6,9 +6,10 @@ const CONFIG = {
     whatsapp: 'https://wa.me/234XXXXXXXXXX',
     facebook: 'https://facebook.com/yourusername',
     twitter:  'https://x.com/yourusername',
-    email:    'mailto:your-email@gmail.com',
-    phone:    'tel:+234XXXXXXXXXX',
+    email:    'your-email@gmail.com',
+    phone:    '+234XXXXXXXXXX',
   },
+  formspreeEndpoint: '',
   roles: [
     'Web Developer',
     'Network Engineer',
@@ -162,3 +163,80 @@ function onScroll() {
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('load', onScroll);
+
+/* ======================================
+   CONTACT FORM
+   ====================================== */
+const contactForm = document.getElementById('contactForm');
+const formStatus  = document.getElementById('formStatus');
+
+function setFormMessage(msg, type, keepSpinner) {
+  formStatus.className = 'form-status ' + (type || '');
+  formStatus.innerHTML = keepSpinner ? '<span class="spinner"></span>' + msg : msg;
+}
+
+function validateField(el) {
+  const ok = el.checkValidity();
+  el.classList.toggle('input-error', !ok);
+  return ok;
+}
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name    = document.getElementById('name');
+    const email   = document.getElementById('email');
+    const subject = document.getElementById('subject');
+    const message = document.getElementById('message');
+
+    const fields = [name, email, subject, message];
+    const allValid = fields.every(validateField);
+
+    if (!allValid) {
+      setFormMessage('Please fill in all fields correctly.', 'error');
+      return;
+    }
+
+    const data = { name: name.value, email: email.value, subject: subject.value, message: message.value };
+    const submitBtn = contactForm.querySelector('.form-submit');
+    const btnLabel  = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
+    setFormMessage('Sending your message...', '', true);
+
+    if (CONFIG.formspreeEndpoint) {
+      try {
+        const res = await fetch(CONFIG.formspreeEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (res.ok) {
+          setFormMessage('Message sent! I\'ll get back to you soon. 🎉', 'success');
+          contactForm.reset();
+        } else {
+          setFormMessage('Something went wrong. Please try again.', 'error');
+        }
+      } catch (err) {
+        setFormMessage('Network error. Please try again.', 'error');
+      }
+    } else {
+      const mailto = `${CONFIG.socials.email}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent('Name: ' + data.name + '\nEmail: ' + data.email + '\n\n' + data.message)}`;
+      try {
+        window.location.href = mailto;
+        setFormMessage('Your email app should open now. If nothing happened, your email address needs to be set in js/script.js → CONFIG.', 'success');
+      } catch (err) {
+        setFormMessage('Could not open your email app.', 'error');
+      }
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = btnLabel;
+  });
+
+  contactForm.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('input', () => {
+      if (el.classList.contains('input-error')) validateField(el);
+    });
+  });
+}

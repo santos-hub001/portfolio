@@ -146,6 +146,9 @@ button { border: none; background: none; cursor: pointer; color: inherit; font-f
 .btn-primary:hover { box-shadow: 0 8px 30px var(--accent-glow); }
 .btn-outline { border: 2px solid var(--accent); color: var(--accent); }
 .btn-outline:hover { background: var(--accent-glow); }
+.btn-ghost { color: var(--text2); }
+.btn-ghost:hover { color: var(--accent); }
+.btn-ghost i { font-size: 1rem; }
 
 .hero-socials { display: flex; gap: 16px; }
 .hero-socials a {
@@ -331,6 +334,46 @@ button { border: none; background: none; cursor: pointer; color: inherit; font-f
 .contact-grid {
   display: grid; grid-template-columns: repeat(5,1fr); gap: 20px;
 }
+.contact-cols { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
+.form-title { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; }
+.contact-form-wrap {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px;
+}
+.contact-cards-wrap .contact-grid { grid-template-columns: 1fr 1fr; }
+.contact-cards-wrap .contact-card {
+  padding: 24px 12px;
+}
+.contact-cards-wrap .contact-card h3 { font-size: .9rem; }
+
+.contact-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 8px; }
+.form-group input,
+.form-group textarea {
+  width: 100%; padding: 12px 14px; border-radius: 10px;
+  background: var(--bg); border: 1px solid var(--border);
+  color: var(--text); font-family: var(--font-body); font-size: .95rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.form-group textarea { resize: vertical; min-height: 120px; }
+.form-group input.input-error,
+.form-group textarea.input-error { border-color: #ef4444; }
+.form-submit { width: 100%; }
+.form-status { margin-top: 16px; font-size: .9rem; font-weight: 500; min-height: 24px; }
+.form-status.success { color: #22c55e; }
+.form-status.error { color: #ef4444; }
+.form-status .spinner {
+  display: inline-block; width: 14px; height: 14px; margin-right: 8px;
+  border: 2px solid rgba(99,102,241,.3); border-top-color: var(--accent);
+  border-radius: 50%; animation: spin .8s linear infinite; vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
 .contact-card {
   background: var(--bg2); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 32px 16px; text-align: center;
@@ -392,6 +435,7 @@ button { border: none; background: none; cursor: pointer; color: inherit; font-f
   .skills-grid { grid-template-columns: repeat(2,1fr); }
   .gaming-grid { grid-template-columns: repeat(3,1fr); }
   .contact-grid { grid-template-columns: repeat(3,1fr); }
+  .contact-cols { grid-template-columns: 1fr; gap: 32px; }
 }
 
 @media (max-width: 768px) {
@@ -422,5 +466,6 @@ button { border: none; background: none; cursor: pointer; color: inherit; font-f
   .skills-grid { grid-template-columns: 1fr; }
   .gaming-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr 1fr; }
+  .contact-form .form-row { grid-template-columns: 1fr; }
   .hero-btns { flex-direction: column; align-items: center; }
 }
