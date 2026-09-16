@@ -461,7 +461,6 @@ button { border: none; background: none; cursor: pointer; color: inherit; font-f
   .hero-socials { justify-content: center; }
   .hero-image { order: -1; }
   .img-frame { width: 220px; height: 220px; }
-  .floating-badge { display: none; }
   .scroll-indicator { display: none; }
   .about-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: 1fr 1fr; }
