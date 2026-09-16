@@ -452,6 +452,9 @@ button { border: none; background: none; cursor: pointer; color: inherit; font-f
 }
 .footer-socials a:hover { background: var(--accent); color: #fff; transform: translateY(-3px); }
 .footer-copy { margin-top: 16px; font-size: .8rem; }
+.footer-mirror { margin-top: 8px; font-size: .8rem; }
+.footer-mirror a { color: var(--accent); text-decoration: underline; }
+.footer-mirror a:hover { color: var(--text); }
 
 /* ======================================
    BACK TO TOP
