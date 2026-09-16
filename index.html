@@ -62,8 +62,9 @@
         </div>
       </div>
       <div class="hero-image reveal">
-        <div class="img-frame">
-          <img src="Assets/profile-picture.jpeg" alt="Santos profile picture">
+        <div class="img-frame" id="profileFrame" role="button" aria-label="View profile picture" title="Click to view">
+          <img src="Assets/profile-picture.jpeg" alt="Santos profile picture" draggable="false">
+          <div class="frame-tip"><i class="fas fa-search-plus"></i></div>
         </div>
         <div class="floating-badge badge-code">
           <i class="fas fa-code"></i><span>Web Developer</span>
@@ -370,6 +371,15 @@
   <button id="backToTop" class="back-to-top" aria-label="Back to top">
     <i class="fas fa-arrow-up"></i>
   </button>
+
+  <div class="lightbox" id="profileLightbox" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <span class="lightbox-close" role="button" aria-label="Close"><i class="fas fa-times"></i></span>
+      <img src="Assets/profile-picture.jpeg" alt="Santos profile picture" draggable="false">
+      <span class="lightbox-note"><i class="fas fa-shield-halved"></i> Protected image - please don't save or screenshot</span>
+    </div>
+  </div>
 
   <script src="js/script.js"></script>
 </body>

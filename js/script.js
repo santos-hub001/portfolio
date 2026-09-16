@@ -148,6 +148,40 @@ backToTop.addEventListener('click', () => {
 });
 
 /* ======================================
+   PROFILE PICTURE LIGHTBOX + PROTECTION
+   ====================================== */
+const profileFrame  = document.getElementById('profileFrame');
+const profileLightbox = document.getElementById('profileLightbox');
+
+function openProfile() {
+  profileLightbox.classList.add('open');
+  profileLightbox.setAttribute('aria-hidden', 'false');
+  body.style.overflow = 'hidden';
+}
+function closeProfile() {
+  profileLightbox.classList.remove('open');
+  profileLightbox.setAttribute('aria-hidden', 'true');
+  body.style.overflow = '';
+}
+profileFrame.addEventListener('click', openProfile);
+profileLightbox.querySelector('.lightbox-backdrop').addEventListener('click', closeProfile);
+profileLightbox.querySelector('.lightbox-close').addEventListener('click', closeProfile);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeProfile();
+});
+
+function blockEvent(e) { e.preventDefault(); }
+
+[profileFrame, profileLightbox].forEach(el => {
+  el.addEventListener('contextmenu', blockEvent);
+  el.addEventListener('dragstart', blockEvent);
+  el.addEventListener('selectstart', blockEvent);
+});
+profileLightbox.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && ['s', 'p', 'u'].includes(e.key.toLowerCase())) blockEvent(e);
+});
+
+/* ======================================
    FOOTER YEAR
    ====================================== */
 yearEl.textContent = new Date().getFullYear();
